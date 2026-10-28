@@ -8,6 +8,17 @@
 	<body class="page">
 		<main class="main">
 			<h1 class="page-title"><%= title %></h1>
+			<a class="new-message-link" href="/new">New message</a>
+            <ul class="message-list">
+				<% messages.forEach((message, index) => { %>
+					<li class="message-item">
+						<p class="message-user"><%= message.user %></p>
+						<p class="message-text"><%= message.text %></p>
+						<p class="message-date"><%= message.added.toLocaleString() %></p>
+						<a class="message-open-link" href="/messages/<%= index %>">Open</a>
+					</li>
+				<% }); %>
+			</ul>
 		</main>
 	</body>
 </html>
