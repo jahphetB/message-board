@@ -15,7 +15,10 @@ const compiledViews = templates.map((name) => {
 
 	const render = ejs.compile(source, {
 		client: true,
-		compileDebug: false
+		compileDebug: false,
+		strict: true,
+		_with: false,
+		destructuredLocals: ["title", "messages", "message"]
 	});
 
 	return `${JSON.stringify(name)}: ${render.toString()}`;
