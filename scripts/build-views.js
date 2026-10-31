@@ -1,0 +1,31 @@
+const fs = require("node:fs");
+const path = require("node:path");
+const ejs = require("ejs");
+
+const viewsDirectory = path.join(__dirname, "../views");
+const outputDirectory = path.join(__dirname, "../generated");
+
+const templates = ["index", "form", "message"];
+
+const compiledViews = templates.map((name) => {
+	const source = fs.readFileSync(
+		path.join(viewsDirectory, `${name}.ejs`),
+		"utf8"
+	);
+
+	const render = ejs.compile(source, {
+		client: true,
+		compileDebug: false
+	});
+
+	return `${JSON.stringify(name)}: ${render.toString()}`;
+});
+
+fs.mkdirSync(outputDirectory, { recursive: true });
+
+fs.writeFileSync(
+	path.join(outputDirectory, "views.js"),
+	`module.exports = {\n${compiledViews.join(",\n")}\n};\n`
+);
+
+console.log("Compiled index, form, and message views.");
