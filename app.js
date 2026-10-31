@@ -14,6 +14,11 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 app.use("/", indexRouter);
 
+app.use((err, req, res, next) => {
+	console.error(err);
+	res.status(500).send("Something went wrong. Please try again.");
+});
+
 app.listen(PORT, (error) => {
 	if (error) {
 		throw error;
