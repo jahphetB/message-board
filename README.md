@@ -2,7 +2,7 @@
 
 A message board built with Express and EJS, with persistent messages stored in Neon PostgreSQL.
 
-[Live Demo](https://message-board.message-board.workers.dev)
+[Live Demo](https://message-board.jahphet.workers.dev/)
 
 ## Features
 
