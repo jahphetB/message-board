@@ -16,7 +16,24 @@
 						<p class="message-user"><%= message.user %></p>
 						<p class="message-text"><%= message.text %></p>
 						<p class="message-date"><%= message.added.toLocaleString() %></p>
-						<a class="message-open-link" href="/messages/<%= message.id %>">Open</a>
+						<div class="message-actions">
+							<a class="message-open-link" href="/messages/<%= message.id %>">
+								Open
+							</a>
+
+							<form
+								class="message-delete-form"
+								method="POST"
+								action="/messages/<%= message.id %>/delete"
+							>
+								<a class="message-edit-link" href="/messages/<%= message.id %>/edit">
+									Edit
+								</a>
+								<button class="message-delete-button" type="submit">
+									Delete
+								</button>
+							</form>
+						</div>
 					</li>
 				<% }); %>
 			</ul>

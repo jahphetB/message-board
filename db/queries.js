@@ -24,8 +24,28 @@ async function insertMessage(user, text) {
 	);
 }
 
+async function deleteMessage(id) {
+	const { rowCount } = await pool.query(
+		"DELETE FROM messages WHERE id = $1",
+		[id]
+	);
+
+	return rowCount > 0;
+}
+
+async function updateMessage(id, user, text) {
+	const { rowCount } = await pool.query(
+		'UPDATE messages SET "user" = $1, text = $2 WHERE id = $3',
+		[user, text, id]
+	);
+
+	return rowCount > 0;
+}
+
 module.exports = {
 	getAllMessages,
 	getMessageById,
-	insertMessage
+	insertMessage,
+	deleteMessage,
+	updateMessage
 };

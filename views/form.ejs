@@ -10,14 +10,33 @@
 		<main class="main">
 			<h1 class="page-title"><%= title %></h1>
 
-			<form class="message-form" method="POST" action="/new">
+			<form
+				class="message-form"
+				method="POST"
+				action="<%= message ? '/messages/' + message.id + '/edit' : '/new' %>"
+			>
 				<label class="form-label" for="message-user">Your name</label>
-				<input class="form-input" id="message-user" name="messageUser" required>
+				<input
+					class="form-input"
+					id="message-user"
+					name="messageUser"
+					value="<%= message ? message.user : '' %>"
+					maxlength="100"
+					required
+				>
 
 				<label class="form-label" for="message-text">Message</label>
-				<textarea class="form-textarea" id="message-text" name="messageText" required></textarea>
+				<textarea
+					class="form-textarea"
+					id="message-text"
+					name="messageText"
+					maxlength="2000"
+					required
+				><%= message ? message.text : '' %></textarea>
 
-				<button class="form-submit" type="submit">Add message</button>
+				<button class="form-submit" type="submit">
+					<%= message ? 'Save changes' : 'Add message' %>
+				</button>
 			</form>
 
 			<a class="home-link" href="/">Back to messages</a>
